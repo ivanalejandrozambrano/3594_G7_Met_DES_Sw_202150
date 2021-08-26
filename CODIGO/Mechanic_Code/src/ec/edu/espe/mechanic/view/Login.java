@@ -293,7 +293,7 @@ public class Login extends javax.swing.JFrame {
         String user, password;
         user = txtNombreLogin.getText();
         password = txtPasswordLogin.getText();
-        if( user.equals("jacortez3") &&  password.equals("1234a")){
+        if( user.equals("jacortez3") &&  password.equals("1234a")){ 
             new FSistema().setVisible(true);
             this.dispose();
         }else{

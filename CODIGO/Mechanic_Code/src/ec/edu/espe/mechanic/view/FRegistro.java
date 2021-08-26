@@ -102,6 +102,12 @@ public class FRegistro extends javax.swing.JFrame {
             }
         });
 
+        txtRegistroCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegistroCedulaActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Informacion Cuenta");
 
         lblRegistroPass1.setText("User");
@@ -245,13 +251,52 @@ public class FRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        
+       
         ArchivoAdmin crud = new ArchivoAdmin();
         
         BasicDBObject searchedName = new BasicDBObject();
         String data,pass;
         data = txtRegistroUser.getText();
         pass = txtRegistroContrasena.getText();
+        
+        
+        int suma=0;
+        if( txtRegistroCedula.getText().length()!=10){             
+        JOptionPane.showMessageDialog(null, "Ingrese su cedula de 10 digitos");               
+        }else{
+            int a[]=new int [txtRegistroCedula.getText().length()/2];
+            int b[]=new int [(txtRegistroCedula.getText().length()/2)];
+            int c=0;
+            int d=1;
+        for (int i = 0; i < txtRegistroCedula.getText().length()/2; i++) {
+        a[i]=Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(c)));
+        c=c+2;
+        if (i < (txtRegistroCedula.getText().length()/2)-1) {
+          b[i]=Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(d)));
+          d=d+2;
+        }
+      }
+   
+      for (int i = 0; i < a.length; i++) {
+        a[i]=a[i]*2;
+        if (a[i] >9){
+          a[i]=a[i]-9;
+        }
+        suma=suma+a[i]+b[i];
+      } 
+        int aux=suma/10;
+        int dec=(aux+1)*10;
+        if ((dec - suma) == Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(txtRegistroCedula.getText().length()-1)))){
+            JOptionPane.showMessageDialog(null, "Se a validado Cedula Correcta");
+        }else{
+            if(suma%10==0 && txtRegistroCedula.getText().charAt(txtRegistroCedula.getText().length()-1)=='0'){
+                JOptionPane.showMessageDialog(null, "Se ha validado Cedula Correcta");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cedula ingresado no existe");                
+            }
+    }
+
+        
         if (!data.equals("jonathan3")){
             if (txtRegistroNombre.getText().isEmpty() || txtRegistroApellido.getText().isEmpty() || txtRegistroCedula.getText().isEmpty() || txtRegistroUser.getText().isEmpty() || txtRegistroContrasena.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "FILL ALL THE FIELDS");
@@ -290,7 +335,7 @@ public class FRegistro extends javax.swing.JFrame {
         }
             
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
@@ -299,6 +344,10 @@ public class FRegistro extends javax.swing.JFrame {
     private void txtRegistroUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRegistroUserActionPerformed
+
+    private void txtRegistroCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRegistroCedulaActionPerformed
 
     public void emptyFields() {
         txtRegistroNombre.setText("");
