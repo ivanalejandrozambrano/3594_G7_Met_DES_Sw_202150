@@ -52,6 +52,7 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        pnlLogin.setBackground(new java.awt.Color(0, 153, 153));
         pnlLogin.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 51, 153)));
         pnlLogin.setEnabled(false);
         pnlLogin.setFocusable(false);
@@ -176,7 +177,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jButton2))
         );
 
-        pnlInicio.setBackground(new java.awt.Color(153, 204, 255));
+        pnlInicio.setBackground(new java.awt.Color(0, 153, 153));
         pnlInicio.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 153)));
         pnlInicio.setEnabled(false);
 
@@ -293,7 +294,7 @@ public class Login extends javax.swing.JFrame {
         String user, password;
         user = txtNombreLogin.getText();
         password = txtPasswordLogin.getText();
-        if( user.equals("jacortez3") &&  password.equals("1234a")){ 
+        if( user.equals("jacortez3") &&  password.equals("12345")){ 
             new FSistema().setVisible(true);
             this.dispose();
         }else{
