@@ -5,7 +5,17 @@
  */
 package ec.edu.espe.mechanic.view;
 
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import static ec.edu.espe.mechanic.utils.Connection.createConnection;
+import static ec.edu.espe.mechanic.utils.OperationMongoDB.deleteCars;
+import static ec.edu.espe.mechanic.utils.OperationMongoDB.updateCars;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -13,6 +23,8 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
+    MongoClient mongo = createConnection();
+    
     public Login() {
         initComponents();
         pnlLogin.setVisible(false);
@@ -294,12 +306,31 @@ public class Login extends javax.swing.JFrame {
         String user, password;
         user = txtNombreLogin.getText();
         password = txtPasswordLogin.getText();
-        if( user.equals("jacortez3") &&  password.equals("12345")){ 
-            new FSistema().setVisible(true);
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+        DBCursor cursor = null;
+        
+        DB db = mongo.getDB("Mechanic");
+        DBCollection dbCollection = db.getCollection("Users");
+        try {
+            cursor = dbCollection.find();
+            
+            while (cursor.hasNext()) {
+                DBObject obj = cursor.next();
+                String name = (String) obj.get("Usuario");
+                String pass = (String) obj.get("Contrasena");
+                
+                if(name.equals(user) && pass.equals(password)){
+                    new FSistema().setVisible(true);
+                    this.dispose();
+                }
+            }
+            
+            cursor.close();
+        } catch (Exception ex) {
+            System.out.println("Error printing tables");
         }
+        
+            //JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+        
     }//GEN-LAST:event_btnIngresarLoginActionPerformed
 
     private void txtNombreLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreLoginActionPerformed
