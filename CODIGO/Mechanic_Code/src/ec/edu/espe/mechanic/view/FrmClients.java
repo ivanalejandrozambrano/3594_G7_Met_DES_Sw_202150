@@ -1,5 +1,8 @@
 package ec.edu.espe.mechanic.view;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JOptionPane;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -98,6 +101,12 @@ public class FrmClients extends javax.swing.JFrame {
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
+            }
+        });
+
+        txtMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMailActionPerformed(evt);
             }
         });
 
@@ -251,7 +260,7 @@ public class FrmClients extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
-        btnExit.setText("Exit");
+        btnExit.setText("SALIR");
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExitMouseEntered
 
@@ -262,15 +271,68 @@ public class FrmClients extends javax.swing.JFrame {
 
     private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
 
-        btnSave.setText("Save");
+        btnSave.setText("GUARDAR");
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveMouseEntered
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        
+        int suma=0;
+        if( txtID.getText().length()!=10){             
+        JOptionPane.showMessageDialog(null, "Ingrese su cedula de 10 digitos");               
+        }else{
+            int a[]=new int [txtID.getText().length()/2];
+            int b[]=new int [(txtID.getText().length()/2)];
+            int c=0;
+            int d=1;
+        for (int i = 0; i < txtID.getText().length()/2; i++) {
+        a[i]=Integer.parseInt(String.valueOf(txtID.getText().charAt(c)));
+        c=c+2;
+        if (i < (txtID.getText().length()/2)-1) {
+          b[i]=Integer.parseInt(String.valueOf(txtID.getText().charAt(d)));
+          d=d+2;
+        }
+      }
+   
+      for (int i = 0; i < a.length; i++) {
+        a[i]=a[i]*2;
+        if (a[i] >9){
+          a[i]=a[i]-9;
+        }
+        suma=suma+a[i]+b[i];
+      } 
+        int aux=suma/10;
+        int dec=(aux+1)*10;
+        if ((dec - suma) == Integer.parseInt(String.valueOf(txtID.getText().charAt(txtID.getText().length()-1)))){
+            JOptionPane.showMessageDialog(null, "Se a validado Cedula Correcta");
+        }else{
+            if(suma%10==0 && txtID.getText().charAt(txtID.getText().length()-1)=='0'){
+                JOptionPane.showMessageDialog(null, "Se ha validado Cedula Correcta");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cedula ingresado no existe");                
+            }
+    }
+        
+        // Patrón para validar el email
+		Pattern pattern2 = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                Pattern pattern = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+)\\.([a-z]+))+");
+		// El email a validar
+		String email = txtMail.getText();
 
+		Matcher mather = pattern.matcher(email);
+                Matcher mather2 = pattern2.matcher(email);
+
+		if (mather.find() == true || mather2.find() == true) {
+                    //JOptionPane.showMessageDialog(null, "El email ingresado es válido.");
+			
+		} else {
+                    JOptionPane.showMessageDialog(null, "El email ingresado No es inválido.");
+			
+		}
+        
         if (txtName.getText().isEmpty() || txtLastname.getText().isEmpty()
                 || txtID.getText().isEmpty() || txtPhone.getText().isEmpty() || txtMail.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "FILL ALL THE FIELDS");
+            JOptionPane.showMessageDialog(null, "Llene todos los campos");
         } else {
             String dataToSave = "Do you want to save this information?\n"
                     + "\nNombre: " + txtName.getText()
@@ -279,13 +341,13 @@ public class FrmClients extends javax.swing.JFrame {
                     + "\nTelefono: " + txtPhone.getText()
                     + "\nE-Mail: " + txtMail.getText();
 
-            int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Client Saving",
+            int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Cliente Guardado",
                     JOptionPane.YES_NO_CANCEL_OPTION);
 
             switch (selection) {
                 case 0:
-                    JOptionPane.showMessageDialog(null, "Information was saved", txtLastname.getText()
-                            + "Saved", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Informacion Guardada", txtLastname.getText()
+                            + "Guardado", JOptionPane.INFORMATION_MESSAGE);
 
                     createCustumer(mongo,
                             "Mechanic",
@@ -298,17 +360,17 @@ public class FrmClients extends javax.swing.JFrame {
 
                     break;
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Information was NOT saved", txtLastname.getText() + "NOT saved",
+                    JOptionPane.showMessageDialog(null, "Informacion No Guardada", txtLastname.getText() + "No Guardada",
                             JOptionPane.INFORMATION_MESSAGE);
                     emptyFields();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Action was cancelled", txtLastname.getText() + "Cancelled",
+                    JOptionPane.showMessageDialog(null, "Accion Cancelada", txtLastname.getText() + "Cancelada",
                             JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
         }
-
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
     public void emptyFields() {
@@ -348,6 +410,10 @@ public class FrmClients extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void txtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMailActionPerformed
 
     /**
      * @param args the command line arguments

@@ -40,7 +40,6 @@ public class FrmCar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtYear = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -57,6 +56,7 @@ public class FrmCar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtModel = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,8 +64,6 @@ public class FrmCar extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtYear.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2022, 1));
 
         jLabel5.setText("Marca");
 
@@ -90,6 +88,12 @@ public class FrmCar extends javax.swing.JFrame {
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
+            }
+        });
+
+        txtMileage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMileageActionPerformed(evt);
             }
         });
 
@@ -152,6 +156,12 @@ public class FrmCar extends javax.swing.JFrame {
 
         jLabel4.setText("Placa");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -162,14 +172,13 @@ public class FrmCar extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMileage, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(14, 14, 14))
@@ -179,8 +188,8 @@ public class FrmCar extends javax.swing.JFrame {
                                     .addComponent(txtRegistration)
                                     .addComponent(txtPlate)
                                     .addComponent(txtTrademark, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtModel, 0, 147, Short.MAX_VALUE)
+                                    .addComponent(jTextField1))))
                         .addGap(32, 32, 32)
                         .addComponent(btnViewCars, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -193,17 +202,17 @@ public class FrmCar extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(jLabel1)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -273,12 +282,12 @@ public class FrmCar extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-        if (txtYear.getInsets().equals(0) || txtRegistration.getText().isEmpty()
+        if (jTextField1.getInsets().equals(0) || txtRegistration.getText().isEmpty()
                 || txtPlate.getText().isEmpty() || txtTrademark.getSelectedItem().equals("") || txtModel.getSelectedItem().equals("") || txtMileage.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "FILL ALL THE FIELDS");
         } else {
             String dataToSave = "Do you want to save this information?\n"
-                    + "\nYear: " + txtYear.getInsets()
+                    + "\nYear: " + jTextField1.getInsets()
                     + "\nRegistration: " + txtRegistration.getText()
                     + "\nPlate: " + txtPlate.getText()
                     + "\nTrademark: " + txtTrademark.getSelectedItem()
@@ -296,7 +305,7 @@ public class FrmCar extends javax.swing.JFrame {
                     createCar(mongo,
                             "Mechanic",
                             "Cars",
-                            txtYear.getComponentCount(),
+                            jTextField1.getComponentCount(),
                             txtRegistration.getText(),
                             txtPlate.getText(),
                             txtTrademark.getSelectedItem().toString(),
@@ -319,7 +328,7 @@ public class FrmCar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
     public void emptyFields() {
-        txtYear.setToolTipText("0");
+        jTextField1.setToolTipText("0");
         txtRegistration.setText("");
         txtPlate.setText("");
         txtTrademark.setSelectedItem("");
@@ -360,6 +369,14 @@ public class FrmCar extends javax.swing.JFrame {
     private void txtModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModelActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void txtMileageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMileageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMileageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,11 +427,11 @@ public class FrmCar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtMileage;
     private javax.swing.JComboBox<String> txtModel;
     private javax.swing.JTextField txtPlate;
     private javax.swing.JTextField txtRegistration;
     private javax.swing.JComboBox<String> txtTrademark;
-    private javax.swing.JSpinner txtYear;
     // End of variables declaration//GEN-END:variables
 }
