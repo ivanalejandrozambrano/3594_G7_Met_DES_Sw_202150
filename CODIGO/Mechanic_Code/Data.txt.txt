@@ -1,3 +1,0 @@
-
-name=,lastName=,telephoneNumber=,Email=, ID =
-Customer{}
