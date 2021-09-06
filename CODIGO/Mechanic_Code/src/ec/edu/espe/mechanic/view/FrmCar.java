@@ -290,7 +290,7 @@ public class FrmCar extends javax.swing.JFrame {
                     createCar(mongo,
                             "Mechanic",
                             "Cars",
-                            jTextField1.getComponentCount(),
+                            jTextField1.getText(),
                             txtRegistration.getText(),
                             txtPlate.getText(),
                             txtTrademark.getSelectedItem().toString(),

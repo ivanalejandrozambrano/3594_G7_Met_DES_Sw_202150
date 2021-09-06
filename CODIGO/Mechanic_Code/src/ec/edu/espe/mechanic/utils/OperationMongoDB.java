@@ -17,7 +17,7 @@ import com.mongodb.MongoClient;
 public class OperationMongoDB {
 
    
-    public static void createCar(MongoClient mongo, String dataBase, String collection, int year, String registration, String plate, String trademark, String model, String mileage) {
+    public static void createCar(MongoClient mongo, String dataBase, String collection, String year, String registration, String plate, String trademark, String model, String mileage) {
         DB db = mongo.getDB(dataBase);
         DBCollection dbCollection = db.getCollection(collection);
         BasicDBObject document = new BasicDBObject();
