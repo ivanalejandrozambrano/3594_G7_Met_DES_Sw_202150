@@ -8,8 +8,9 @@ package ec.edu.espe.mechanic.view;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
-import ec.edu.espe.mechanic.controller.ArchivoAdmin;
+import ec.edu.espe.mechanic.controller.Validacion;
 import static ec.edu.espe.mechanic.utils.Connection.createConnection;
 import static ec.edu.espe.mechanic.utils.OperationMongoDB.createUser;
 import javax.swing.JOptionPane;
@@ -27,11 +28,11 @@ public class FRegistro extends javax.swing.JFrame {
     DBCollection collection;
     BasicDBObject document = new BasicDBObject();
     MongoClient mongo = createConnection();
-
-    public FRegistro() {
+    
+    public FRegistro(){
         initComponents();
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,7 +87,10 @@ public class FRegistro extends javax.swing.JFrame {
             }
         });
 
-        btnRetroceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return.png"))); // NOI18N
+        btnRetroceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return32.png"))); // NOI18N
+        btnRetroceder.setContentAreaFilled(false);
+        btnRetroceder.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return64.png"))); // NOI18N
+        btnRetroceder.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return64.png"))); // NOI18N
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetrocederActionPerformed(evt);
@@ -116,15 +120,15 @@ public class FRegistro extends javax.swing.JFrame {
         lblRegistroPass1.setText("Usuario");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/exit_48.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/exit_64.png"))); // NOI18N
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/exit_64.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        lblCancelar.setText("Cancelar");
-
-        lblRetroceder.setText("Retroceder");
         lblRetroceder.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -132,64 +136,64 @@ public class FRegistro extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(87, 87, 87)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(276, 276, 276))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblRegistroPass1)
-                                            .addComponent(lblRegistroPass))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtRegistroUser)
-                                            .addComponent(txtRegistroContrasena)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblRegistroNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtRegistroApellido))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblRegistroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtRegistroNombre))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblRegistroCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtRegistroCedula)))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblRetroceder)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnRetroceder)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblRegistroError, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCancelar)))
+                                    .addComponent(lblRegistroPass1)
+                                    .addComponent(lblRegistroPass))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRegistroUser)
+                                    .addComponent(txtRegistroContrasena)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblRegistroNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRegistroApellido))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblRegistroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRegistroNombre))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblRegistroCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRegistroCedula)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblRetroceder))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btnRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblRegistroError, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(87, 87, 87)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel5)))
-                .addGap(276, 276, 276))
+                        .addGap(84, 84, 84)
+                        .addComponent(lblCancelar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addGap(316, 316, 316))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,15 +218,12 @@ public class FRegistro extends javax.swing.JFrame {
                             .addComponent(txtRegistroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtRegistroUser, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -235,22 +236,31 @@ public class FRegistro extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnRegistrar)
                                 .addGap(33, 33, 33)))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRegistroError, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRetroceder))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCancelar)
-                    .addComponent(lblRetroceder))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(lblRegistroError, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(btnRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCancelar)
+                            .addComponent(lblRetroceder))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,6 +271,19 @@ public class FRegistro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtRegistroCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRegistroCedulaActionPerformed
+
+    private void txtRegistroUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRegistroUserActionPerformed
+
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
         new Login().setVisible(true);
         this.dispose();
@@ -268,104 +291,95 @@ public class FRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-       
-        ArchivoAdmin crud = new ArchivoAdmin();
+        Validacion ArchivoAdmin = new Validacion();
         
+        DBCursor cursor = null;
+        
+        DB db = mongo.getDB("Mechanic");
+        DBCollection dbCollection = db.getCollection("Users");
+
         BasicDBObject searchedName = new BasicDBObject();
         String data,pass;
         data = txtRegistroUser.getText();
         pass = txtRegistroContrasena.getText();
-        
-        
+
         int suma=0;
-        if( txtRegistroCedula.getText().length()!=10){             
-        JOptionPane.showMessageDialog(null, "Ingrese su cedula de 10 digitos");               
+        if( txtRegistroCedula.getText().length()!=10){
+            JOptionPane.showMessageDialog(null, "Ingrese su cedula de 10 digitos");
         }else{
             int a[]=new int [txtRegistroCedula.getText().length()/2];
             int b[]=new int [(txtRegistroCedula.getText().length()/2)];
             int c=0;
             int d=1;
-        for (int i = 0; i < txtRegistroCedula.getText().length()/2; i++) {
-        a[i]=Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(c)));
-        c=c+2;
-        if (i < (txtRegistroCedula.getText().length()/2)-1) {
-          b[i]=Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(d)));
-          d=d+2;
-        }
-      }
-   
-      for (int i = 0; i < a.length; i++) {
-        a[i]=a[i]*2;
-        if (a[i] >9){
-          a[i]=a[i]-9;
-        }
-        suma=suma+a[i]+b[i];
-      } 
-        int aux=suma/10;
-        int dec=(aux+1)*10;
-        if ((dec - suma) == Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(txtRegistroCedula.getText().length()-1)))){
-            JOptionPane.showMessageDialog(null, "Se a validado Cedula Correcta");
-        }else{
-            if(suma%10==0 && txtRegistroCedula.getText().charAt(txtRegistroCedula.getText().length()-1)=='0'){
-                JOptionPane.showMessageDialog(null, "Se ha validado Cedula Correcta");
-            }else{
-                JOptionPane.showMessageDialog(null, "Cedula ingresado no existe");                
+            for (int i = 0; i < txtRegistroCedula.getText().length()/2; i++) {
+                a[i]=Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(c)));
+                c=c+2;
+                if (i < (txtRegistroCedula.getText().length()/2)-1) {
+                    b[i]=Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(d)));
+                    d=d+2;
+                }
             }
-    }
 
-        
-        if (!data.equals("jonathan3")){
-            if (txtRegistroNombre.getText().isEmpty() || txtRegistroApellido.getText().isEmpty() || txtRegistroCedula.getText().isEmpty() || txtRegistroUser.getText().isEmpty() || txtRegistroContrasena.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Llene todos los campos");
-               
-            } else {
-                String dataToSave = "Su informacion es: \n"
-                        + "\nNombre: " + txtRegistroNombre.getText()
-                        + "\nApellido: " + txtRegistroApellido.getText()
-                        + "\nCedula: " + txtRegistroCedula.getText();
+            for (int i = 0; i < a.length; i++) {
+                a[i]=a[i]*2;
+                if (a[i] >9){
+                    a[i]=a[i]-9;
+                }
+                suma=suma+a[i]+b[i];
+            }
+            int aux=suma/10;
+            int dec=(aux+1)*10;
+            if ((dec - suma) != Integer.parseInt(String.valueOf(txtRegistroCedula.getText().charAt(txtRegistroCedula.getText().length()-1)))){
+                if(suma%10==0 && txtRegistroCedula.getText().charAt(txtRegistroCedula.getText().length()-1)=='0'){
+                    JOptionPane.showMessageDialog(null, "Se ha validado Cedula Correcta");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Cedula ingresado no existe");
+                }
+            }
+            
+            boolean valid = ArchivoAdmin.validarUser(txtRegistroUser.getText());
+            boolean validID = ArchivoAdmin.validarID(txtRegistroCedula.getText(),"Users");
+            
+            if (valid == false && validID == false){
+                if (txtRegistroNombre.getText().isEmpty() || txtRegistroApellido.getText().isEmpty() || txtRegistroCedula.getText().isEmpty() || txtRegistroUser.getText().isEmpty() || txtRegistroContrasena.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Llene todos los campos");
 
-                int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Person Saving",
+                } else {
+                    String dataToSave = "Su informacion es: \n"
+                    + "\nNombre: " + txtRegistroNombre.getText()
+                    + "\nApellido: " + txtRegistroApellido.getText()
+                    + "\nCedula: " + txtRegistroCedula.getText();
+
+                    int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Datos Guardados",
                         JOptionPane.YES_NO_CANCEL_OPTION);
 
-                switch (selection) {
-                    case 0:
-                        JOptionPane.showMessageDialog(null, "Informacion guardada con exito", txtRegistroNombre.getText() + " " + txtRegistroApellido.getText() + "Saved", JOptionPane.INFORMATION_MESSAGE);
+                    switch (selection) {
+                        case 0:
+                        JOptionPane.showMessageDialog(null, "Informacion guardada con exito", txtRegistroNombre.getText() + " " + txtRegistroApellido.getText() + "Guardada", JOptionPane.INFORMATION_MESSAGE);
 
                         createUser(mongo, "Mechanic", "Users", txtRegistroNombre.getText(), txtRegistroApellido.getText(), txtRegistroCedula.getText(), txtRegistroUser.getText(), txtRegistroContrasena.getText());
 
                         break;
-                    case 1:
+                        case 1:
                         JOptionPane.showMessageDialog(null, "La informacion de ", txtRegistroNombre.getText() + " " + txtRegistroApellido.getText() + "NO fue guardada", JOptionPane.INFORMATION_MESSAGE);
                         emptyFields();
                         break;
-                    default:
+                        default:
                         JOptionPane.showMessageDialog(null, "El proceso ha sido cancelado", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
                         emptyFields();
                         break;
+                    }
+                    emptyFields();
                 }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos existentes");
                 emptyFields();
             }
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Datos existentes");
-             emptyFields();
-        }
-            
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
-    }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtRegistroUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRegistroUserActionPerformed
-
-    private void txtRegistroCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRegistroCedulaActionPerformed
-
+    }  
+    
     public void emptyFields() {
         txtRegistroNombre.setText("");
         txtRegistroApellido.setText("");

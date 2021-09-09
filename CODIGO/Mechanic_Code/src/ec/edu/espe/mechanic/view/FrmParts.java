@@ -5,9 +5,9 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
+import ec.edu.espe.mechanic.controller.Validacion;
 import static ec.edu.espe.mechanic.utils.Connection.createConnection;
 import javax.swing.table.DefaultTableModel;
-import static ec.edu.espe.mechanic.utils.OperationMongoDB.createCar;
 import static ec.edu.espe.mechanic.utils.OperationMongoDB.createParts;
 
 /**
@@ -54,8 +54,8 @@ public class FrmParts extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtTrademark = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        txtModel = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        txtModel = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -118,6 +118,7 @@ public class FrmParts extends javax.swing.JFrame {
         });
 
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return32.png"))); // NOI18N
+        btnReturn.setContentAreaFilled(false);
         btnReturn.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return64.png"))); // NOI18N
         btnReturn.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/mechanic/images/return64.png"))); // NOI18N
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
@@ -138,13 +139,6 @@ public class FrmParts extends javax.swing.JFrame {
 
         jLabel2.setText("Codigo");
 
-        txtModel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "6", "A 1", "A 3", "AMG GT", "Ariya", "Arkana", "Arteon", "ASX", "Auris", "Aveo", "Bronco", "Camry", "Captiva", "Captur", "Carens", "Cherokee", "Civic", "Clase A", "Compass", "CR-V", "CX-5", "CX-30", "E-tron", "Eclipse Cross", "Evalia", "Fiesta", "GLB", "GT-R", "Grand Cherokee", "I-MIEV", "Ignis", "Jazz", "Jimny", "Kona", "Mustang", "Niro", "Passat", "Rio", "S60", "S80", "Santa Fe", "Serie 1", "Spark", "Tucson", "V60", "Vitara", "X6", "X1", "Yaris", "Zoe" }));
-        txtModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModelActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Nombre");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -164,12 +158,12 @@ public class FrmParts extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtName)
-                                    .addComponent(txtTrademark, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtModel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTrademark, javax.swing.GroupLayout.Alignment.LEADING, 0, 147, Short.MAX_VALUE)
+                                    .addComponent(txtCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,10 +198,10 @@ public class FrmParts extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtTrademark, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,16 +245,21 @@ public class FrmParts extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveMouseEntered
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-
+        
+        Validacion AdmValid = new Validacion();
         if (txtCode.getText().isEmpty() || txtName.getText().isEmpty()
-                || txtTrademark.getSelectedItem().equals("") || txtModel.getSelectedItem().equals("") || txtPrice.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "FILL ALL THE FIELDS");
-        } else {
+                || txtTrademark.getSelectedItem().equals("") || txtModel.getText().isEmpty() || txtPrice.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos");
+        } 
+        
+        boolean valid = AdmValid.validarCode(txtCode.getText());
+
+        if(valid == false) {
             String dataToSave = "Do you want to save this information?\n"
                     + "\nCodigo: " + txtCode.getText()
                     + "\nNombre: " + txtName.getText()
                     + "\nMarca: " + txtTrademark.getSelectedItem()
-                    + "\nModelo: " + txtModel.getSelectedItem()
+                    + "\nModelo: " + txtModel.getText()
                     + "\nPrecio: " + txtPrice.getText();
 
             int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Car Saving",
@@ -277,7 +276,7 @@ public class FrmParts extends javax.swing.JFrame {
                             txtCode.getText(),
                             txtName.getText(),
                             txtTrademark.getSelectedItem().toString(),
-                            txtModel.getSelectedItem().toString(),
+                            txtModel.toString(),
                             txtPrice.getText());
 
                     break;
@@ -291,6 +290,8 @@ public class FrmParts extends javax.swing.JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Datos existentes");
         }
 
         // TODO add your handling code here:
@@ -299,7 +300,7 @@ public class FrmParts extends javax.swing.JFrame {
         txtCode.setText("");
         txtName.setText("");
         txtTrademark.setSelectedItem("");
-        txtModel.setSelectedItem("");
+        txtModel.setText("");
         txtPrice.setText("");
     }
 
@@ -332,10 +333,6 @@ public class FrmParts extends javax.swing.JFrame {
     private void txtTrademarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrademarkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTrademarkActionPerformed
-
-    private void txtModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,7 +385,7 @@ public class FrmParts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCode;
-    private javax.swing.JComboBox<String> txtModel;
+    private javax.swing.JTextField txtModel;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JComboBox<String> txtTrademark;

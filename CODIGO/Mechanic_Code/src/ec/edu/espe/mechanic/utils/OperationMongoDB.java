@@ -12,7 +12,7 @@ import com.mongodb.MongoClient;
 
 /**
  *
- * @author SigmaProgramers
+ * @author G7
  */
 public class OperationMongoDB {
 
@@ -42,14 +42,6 @@ public class OperationMongoDB {
                 searchedName.append(field, data);
                 updateData.append("$set", new BasicDBObject().append(field, newData));
 
-            } else if (field.equals("Registration")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("Plate")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
             } else if (field.equals("Trademark")) {
                 searchedName.append(field, data);
                 updateData.append("$set", new BasicDBObject().append(field, newData));
@@ -58,9 +50,6 @@ public class OperationMongoDB {
                 searchedName.append(field, data);
                 updateData.append("$set", new BasicDBObject().append(field, newData));
 
-            } else if (field.equals("Mileage")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
             }
             dbCollection.updateMulti(searchedName, updateData);
 
@@ -107,50 +96,6 @@ public class OperationMongoDB {
         dbCollection.insert(document);
     }
     
-    public static void updateCustumer(MongoClient mongo, String dataBase, String collection, String data, String newData, String field) {
-        DB db = mongo.getDB(dataBase);
-        DBCollection dbCollection = db.getCollection(collection);
-        BasicDBObject searchedName = new BasicDBObject();
-        BasicDBObject updateData = new BasicDBObject();
-        try {
-            if (field.equals("Name")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("LastName")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("Cedula")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("Telefono")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("E-Mail")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-            }
-            dbCollection.updateMulti(searchedName, updateData);
-
-        } catch (Exception ex) {
-            System.out.println("DATA NOT FOUND");
-        }
-    }
-
-    public static void deleteCustumer(MongoClient mongo, String dataBase, String collection, String ID) {
-        try {
-            DB db = mongo.getDB(dataBase);
-            DBCollection dbCollection = db.getCollection(collection);
-            dbCollection.remove(new BasicDBObject().append("ID", ID));
-        } catch (Exception ex) {
-            System.out.println("DATA NOT FOUNT");
-        }
-    }
-
-    
     public static void createParts(MongoClient mongo, String dataBase, String collection, String code, String name, String trademark, String model, String price) {
         DB db = mongo.getDB(dataBase);
         DBCollection dbCollection = db.getCollection(collection);
@@ -171,15 +116,7 @@ public class OperationMongoDB {
         BasicDBObject searchedName = new BasicDBObject();
         BasicDBObject updateData = new BasicDBObject();
         try {
-            if (field.equals("Codigo")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("Nombre")) {
-                searchedName.append(field, data);
-                updateData.append("$set", new BasicDBObject().append(field, newData));
-
-            } else if (field.equals("Marca")) {
+            if (field.equals("Marca")) {
                 searchedName.append(field, data);
                 updateData.append("$set", new BasicDBObject().append(field, newData));
 
@@ -202,7 +139,7 @@ public class OperationMongoDB {
         try {
             DB db = mongo.getDB(dataBase);
             DBCollection dbCollection = db.getCollection(collection);
-            dbCollection.remove(new BasicDBObject().append("ID", ID));
+            dbCollection.remove(new BasicDBObject().append("Codigo", ID));
         } catch (Exception ex) {
             System.out.println("DATA NOT FOUNT");
         }

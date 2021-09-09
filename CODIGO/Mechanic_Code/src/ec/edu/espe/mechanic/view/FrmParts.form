@@ -64,11 +64,11 @@
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtPrice" min="-2" pref="80" max="-2" attributes="0"/>
-                              <Component id="txtModel" min="-2" pref="147" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtName" max="32767" attributes="0"/>
-                                      <Component id="txtTrademark" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="txtModel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtName" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtTrademark" alignment="0" pref="147" max="32767" attributes="0"/>
                                       <Component id="txtCode" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -117,11 +117,11 @@
                       <Component id="txtTrademark" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtModel" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtModel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -214,6 +214,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ec/edu/espe/mechanic/images/return32.png"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ec/edu/espe/mechanic/images/return64.png"/>
             </Property>
@@ -272,75 +273,12 @@
             <Property name="text" type="java.lang.String" value="Codigo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="txtModel">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="51">
-                <StringItem index="0" value=""/>
-                <StringItem index="1" value="6"/>
-                <StringItem index="2" value="A 1"/>
-                <StringItem index="3" value="A 3"/>
-                <StringItem index="4" value="AMG GT"/>
-                <StringItem index="5" value="Ariya"/>
-                <StringItem index="6" value="Arkana"/>
-                <StringItem index="7" value="Arteon"/>
-                <StringItem index="8" value="ASX"/>
-                <StringItem index="9" value="Auris"/>
-                <StringItem index="10" value="Aveo"/>
-                <StringItem index="11" value="Bronco"/>
-                <StringItem index="12" value="Camry"/>
-                <StringItem index="13" value="Captiva"/>
-                <StringItem index="14" value="Captur"/>
-                <StringItem index="15" value="Carens"/>
-                <StringItem index="16" value="Cherokee"/>
-                <StringItem index="17" value="Civic"/>
-                <StringItem index="18" value="Clase A"/>
-                <StringItem index="19" value="Compass"/>
-                <StringItem index="20" value="CR-V"/>
-                <StringItem index="21" value="CX-5"/>
-                <StringItem index="22" value="CX-30"/>
-                <StringItem index="23" value="E-tron"/>
-                <StringItem index="24" value="Eclipse Cross"/>
-                <StringItem index="25" value="Evalia"/>
-                <StringItem index="26" value="Fiesta"/>
-                <StringItem index="27" value="GLB"/>
-                <StringItem index="28" value="GT-R"/>
-                <StringItem index="29" value="Grand Cherokee"/>
-                <StringItem index="30" value="I-MIEV"/>
-                <StringItem index="31" value="Ignis"/>
-                <StringItem index="32" value="Jazz"/>
-                <StringItem index="33" value="Jimny"/>
-                <StringItem index="34" value="Kona"/>
-                <StringItem index="35" value="Mustang"/>
-                <StringItem index="36" value="Niro"/>
-                <StringItem index="37" value="Passat"/>
-                <StringItem index="38" value="Rio"/>
-                <StringItem index="39" value="S60"/>
-                <StringItem index="40" value="S80"/>
-                <StringItem index="41" value="Santa Fe"/>
-                <StringItem index="42" value="Serie 1"/>
-                <StringItem index="43" value="Spark"/>
-                <StringItem index="44" value="Tucson"/>
-                <StringItem index="45" value="V60"/>
-                <StringItem index="46" value="Vitara"/>
-                <StringItem index="47" value="X6"/>
-                <StringItem index="48" value="X1"/>
-                <StringItem index="49" value="Yaris"/>
-                <StringItem index="50" value="Zoe"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtModelActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nombre"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtModel">
         </Component>
       </SubComponents>
     </Container>

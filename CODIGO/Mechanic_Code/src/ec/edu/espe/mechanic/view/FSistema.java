@@ -185,7 +185,7 @@ public class FSistema extends javax.swing.JFrame {
 
     private void btnCarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarsActionPerformed
         // TODO add your handling code here:
-        FrmCarManage frmAutos = new FrmCarManage();
+        FrmCar frmAutos = new FrmCar();
         frmAutos.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCarsActionPerformed
