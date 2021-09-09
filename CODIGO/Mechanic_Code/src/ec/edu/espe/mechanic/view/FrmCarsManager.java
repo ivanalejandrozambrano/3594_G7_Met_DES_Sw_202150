@@ -26,7 +26,7 @@ public class FrmCarsManager extends javax.swing.JFrame {
 
     MongoClient mongo = createConnection();
     Validacion AdmValid = new Validacion();
-    
+
     /**
      * Creates new form FrmRead
      */
@@ -287,7 +287,7 @@ public class FrmCarsManager extends javax.swing.JFrame {
         DBCollection dbCollection = db.getCollection("Cars");
         try {
             cursor = dbCollection.find();
-            String[] columnNames = {"Año", "Matricula", "Placa","Marca", "Modelo", "Kilometrage"};
+            String[] columnNames = {"Año", "Matricula", "Placa", "Marca", "Modelo", "Kilometrage"};
             DefaultTableModel modelTable = new DefaultTableModel(columnNames, 0);
             while (cursor.hasNext()) {
                 DBObject obj = cursor.next();
@@ -310,77 +310,79 @@ public class FrmCarsManager extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         String dataToDelete = "Usted desea eliminar " + txtPlate.getText() + "?";
+        boolean valid = AdmValid.validarPlate(txtPlate.getText());
         if (txtPlate.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "FILL ALL THE FIELDS");
-        } 
-        
-        boolean valid = AdmValid.validarPlate(txtPlate.getText());
-            
-        if(valid == true) {
-            int selection = JOptionPane.showConfirmDialog(null, dataToDelete, "Borrado",
-                    JOptionPane.YES_NO_CANCEL_OPTION);
+        } else {
+            if (valid == true) {
+                int selection = JOptionPane.showConfirmDialog(null, dataToDelete, "Borrado",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
 
-            switch (selection) {
-                case 0:
-                    JOptionPane.showMessageDialog(null, "La informacion fue eliminada", txtPlate.getText() + "Eliminado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    deleteCars(mongo, "Mechanic", "Cars", txtPlate.getText());
-                    txtPlate.setText("");
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Se cancelo el proceso", txtPlate.getText() + "NO eliminado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    txtPlate.setText("");
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Se cancelo el proceso", txtPlate.getText() + "Calcelado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    break;
+                switch (selection) {
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "La informacion fue eliminada", txtPlate.getText() + "Eliminado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        deleteCars(mongo, "Mechanic", "Cars", txtPlate.getText());
+                        txtPlate.setText("");
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Se cancelo el proceso", txtPlate.getText() + "NO eliminado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        txtPlate.setText("");
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Se cancelo el proceso", txtPlate.getText() + "Calcelado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no validos");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Datos no validos");
+
         }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        
+
         String dataToUpdate = "Desea actualizar la informacion " + txtDataToUpdate.getText() + "?";
         Cambios cambios = new Cambios();
-        
+        boolean valid = AdmValid.validarPlate(txtPlate.getText());
         if (txtDataToUpdate.getText().isEmpty() || txtNewData.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
-        } 
-        
-        boolean valid = AdmValid.validarPlate(txtPlate.getText());
-            
-        if(valid == true){
-            int selection = JOptionPane.showConfirmDialog(null, dataToUpdate, "Speaker Updating",
-                    JOptionPane.YES_NO_CANCEL_OPTION);
+        } else {
+            if (valid == true) {
+                int selection = JOptionPane.showConfirmDialog(null, dataToUpdate, "Speaker Updating",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
 
-            switch (selection) {
-                case 0:
-                    JOptionPane.showMessageDialog(null, "La informacion fue actualizada", txtDataToUpdate.getText() + "Actualizada",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    updateCars(mongo, "Mechanic", "Cars", txtDataToUpdate.getText(), txtNewData.getText(), cambios.cambioDatos(cmbField.getSelectedItem().toString()));
-                    txtDataToUpdate.setText("");
-                    txtNewData.setText("");
-                    cmbField.setSelectedIndex(0);
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "La informacion NO fue guardad", txtPlate.getText() + "Sin datos cambiados",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    txtDataToUpdate.setText("");
-                    txtNewData.setText("");
-                    cmbField.setSelectedIndex(0);
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "El proceso fue cancelado", txtPlate.getText() + "Cancelado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    break;
+                switch (selection) {
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "La informacion fue actualizada", txtDataToUpdate.getText() + "Actualizada",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        updateCars(mongo, "Mechanic", "Cars", txtDataToUpdate.getText(), txtNewData.getText(), cambios.cambioDatos(cmbField.getSelectedItem().toString()));
+                        txtDataToUpdate.setText("");
+                        txtNewData.setText("");
+                        cmbField.setSelectedIndex(0);
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "La informacion NO fue guardad", txtPlate.getText() + "Sin datos cambiados",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        txtDataToUpdate.setText("");
+                        txtNewData.setText("");
+                        cmbField.setSelectedIndex(0);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "El proceso fue cancelado", txtPlate.getText() + "Cancelado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Codigo no valido");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Codigo no valido");
+
         }
+
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed

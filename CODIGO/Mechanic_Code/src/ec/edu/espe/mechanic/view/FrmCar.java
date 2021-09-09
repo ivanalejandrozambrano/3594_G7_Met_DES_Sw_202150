@@ -282,56 +282,54 @@ public class FrmCar extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         Validacion AdmValid = new Validacion();
-        
+        boolean valid = AdmValid.validarPlate(txtPlate.getText());
+        boolean validMatricula = AdmValid.validarPlate(txtRegistration.getText());
         if (jTextField1.getInsets().equals(0) || txtRegistration.getText().isEmpty()
                 || txtPlate.getText().isEmpty() || txtTrademark.getSelectedItem().equals("") || jTextField2.getText().isEmpty() || txtMileage.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
-        } 
-        
-        boolean valid = AdmValid.validarPlate(txtPlate.getText());
-        boolean validMatricula = AdmValid.validarPlate(txtRegistration.getText());
-        
-        
-        if(valid == false && validMatricula == false) {
-            String dataToSave = "Desea guardar la iguiente informacion?\n"
-                    + "\nAño: " + jTextField1.getText()
-                    + "\nMatricula: " + txtRegistration.getText()
-                    + "\nPlaca: " + txtPlate.getText()
-                    + "\nMarca: " + txtTrademark.getSelectedItem()
-                    + "\nModelo: " + jTextField2.getText()
-                    + "\nKilometraje: " + txtMileage.getText();
+        } else {
+            if (valid == false && validMatricula == false) {
+                String dataToSave = "Desea guardar la iguiente informacion?\n"
+                        + "\nAño: " + jTextField1.getText()
+                        + "\nMatricula: " + txtRegistration.getText()
+                        + "\nPlaca: " + txtPlate.getText()
+                        + "\nMarca: " + txtTrademark.getSelectedItem()
+                        + "\nModelo: " + jTextField2.getText()
+                        + "\nKilometraje: " + txtMileage.getText();
 
-            int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Vehiculo Guardado",
-                    JOptionPane.YES_NO_CANCEL_OPTION);
+                int selection = JOptionPane.showConfirmDialog(null, dataToSave, "Vehiculo Guardado",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
 
-            switch (selection) {
-                case 0:
-                    JOptionPane.showMessageDialog(null, "Informacion fue guardada", jTextField2.getText()
-                            + "Guardado", JOptionPane.INFORMATION_MESSAGE);
+                switch (selection) {
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "Informacion fue guardada", jTextField2.getText()
+                                + "Guardado", JOptionPane.INFORMATION_MESSAGE);
 
-                    createCar(mongo,
-                            "Mechanic",
-                            "Cars",
-                            jTextField1.getText(),
-                            txtRegistration.getText(),
-                            txtPlate.getText(),
-                            txtTrademark.getSelectedItem().toString(),
-                            jTextField2.getText(),
-                            txtMileage.getText());
+                        createCar(mongo,
+                                "Mechanic",
+                                "Cars",
+                                jTextField1.getText(),
+                                txtRegistration.getText(),
+                                txtPlate.getText(),
+                                txtTrademark.getSelectedItem().toString(),
+                                jTextField2.getText(),
+                                txtMileage.getText());
 
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Informacion No guardada", jTextField2.getText() + "NO guardada",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    emptyFields();
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Accion cancelada", jTextField2.getText() + "Cancelado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    break;
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Informacion No guardada", jTextField2.getText() + "NO guardada",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        emptyFields();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Accion cancelada", jTextField2.getText() + "Cancelado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe un vehiculo con esa placa");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Ya existe un vehiculo con esa placa");
+
         }
 
         // TODO add your handling code here:
