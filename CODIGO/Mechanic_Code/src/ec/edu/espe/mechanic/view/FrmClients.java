@@ -334,7 +334,7 @@ public class FrmClients extends javax.swing.JFrame {
         
         
         if(valid == false) {
-            String dataToSave = "Do you want to save this information?\n"
+            String dataToSave = "Usted desea guardar esta informacion?\n"
                     + "\nNombre: " + txtName.getText()
                     + "\nApellido: " + txtLastname.getText()
                     + "\nCedula: " + txtID.getText()

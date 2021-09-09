@@ -247,15 +247,13 @@ public class FrmParts extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
         Validacion AdmValid = new Validacion();
+        boolean valid = AdmValid.validarCode(txtCode.getText());
         if (txtCode.getText().isEmpty() || txtName.getText().isEmpty()
                 || txtTrademark.getSelectedItem().equals("") || txtModel.getText().isEmpty() || txtPrice.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Llene todos los campos");
-        } 
-        
-        boolean valid = AdmValid.validarCode(txtCode.getText());
-
-        if(valid == false) {
-            String dataToSave = "Do you want to save this information?\n"
+        } else {
+            if(valid == false) {
+            String dataToSave = "Usted desea guardar esta informacion?\n"
                     + "\nCodigo: " + txtCode.getText()
                     + "\nNombre: " + txtName.getText()
                     + "\nMarca: " + txtTrademark.getSelectedItem()
@@ -267,7 +265,7 @@ public class FrmParts extends javax.swing.JFrame {
 
             switch (selection) {
                 case 0:
-                    JOptionPane.showMessageDialog(null, "Information was saved", txtName.getText()
+                    JOptionPane.showMessageDialog(null, "Informacion Guardada", txtName.getText()
                             + "Saved", JOptionPane.INFORMATION_MESSAGE);
 
                     createParts(mongo,
@@ -281,18 +279,24 @@ public class FrmParts extends javax.swing.JFrame {
 
                     break;
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Information was NOT saved", txtName.getText() + "NOT saved",
+                    JOptionPane.showMessageDialog(null, "La informacion NO se guardo", txtName.getText() + "Sin Guardar",
                             JOptionPane.INFORMATION_MESSAGE);
                     emptyFields();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Action was cancelled", txtName.getText() + "Cancelled",
+                    JOptionPane.showMessageDialog(null, "Proceso Cancelado", txtName.getText() + "Cancelado",
                             JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
         }else{
             JOptionPane.showMessageDialog(null, "Datos existentes");
         }
+            
+        }
+        
+        
+
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed

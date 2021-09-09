@@ -360,7 +360,7 @@ public class FrmPartsManager extends javax.swing.JFrame {
                     cmbField.setSelectedIndex(0);
                     break;
                 case 1:
-                    JOptionPane.showMessageDialog(null, "La informacion NO fue guardad", txtPlate.getText() + "Sin datos cambiados",
+                    JOptionPane.showMessageDialog(null, "La informacion NO fue guardada", txtPlate.getText() + "Sin datos cambiados",
                             JOptionPane.INFORMATION_MESSAGE);
                     txtDataToUpdate.setText("");
                     txtNewData.setText("");

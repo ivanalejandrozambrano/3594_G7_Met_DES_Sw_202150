@@ -12,7 +12,6 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import static ec.edu.espe.mechanic.utils.Connection.createConnection;
 import static ec.edu.espe.mechanic.utils.OperationMongoDB.deleteCars;
-import static ec.edu.espe.mechanic.utils.OperationMongoDB.updateCars;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
